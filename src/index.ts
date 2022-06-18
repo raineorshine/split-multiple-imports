@@ -1,7 +1,11 @@
 import fs from 'fs'
 import path from 'path'
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
 
 // globby v12+ does not import correctly in typescript + babel setup
+// this breaks the tests!!! wtf
+// not sure how to get both tests and bin working
 // https://github.com/sindresorhus/globby/issues/193
 const globby = require('globby')
 
@@ -42,15 +46,15 @@ const splitMultipleImports = async (startPath: string) => {
       })
 
       // filter out imports with multiple names
-      const parsedMulti = parsed.filter(match => match && match.names.length > 1)
+      const parsedMulti = parsed.filter(match => match && match.names.length > 1) as NonNullable<typeof parsed[0]>[]
 
       return {
         parsed: parsedMulti,
         filePath: fullPath,
         // replace the multi import with separate imports in the original file text
         replaced: parsedMulti.reduce((accum, parsed) => {
-          const textNew = parsed!.names.map(name => `import ${name} from '${parsed!.importPath}/${name}'`).join('\n')
-          return accum.replace(parsed!.line, textNew)
+          const textNew = parsed.names.map(name => `import ${name} from '${parsed.importPath}/${name}'`).join('\n')
+          return accum.replace(parsed.line, textNew)
         }, text),
       }
     }),
