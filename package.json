@@ -1,6 +1,6 @@
 {
   "name": "split-multiple-imports",
-  "description": "",
+  "description": "Splits multiple names in a single es module import into multiple lines.",
   "version": "0.0.0",
   "author": {
     "name": "Raine Revere",
