@@ -36,7 +36,7 @@ const splitMultipleImports = async (startPath: string) => {
               line: statement,
               // trim and split on any number of spaces to handle extra whitespace is present in multi-line import
               names: names.trim().split(/, */g),
-              path,
+              importPath: path,
             }))[0]
           : null
       })
@@ -44,7 +44,7 @@ const splitMultipleImports = async (startPath: string) => {
         parsed: parsed
           // filter out imports with multiple names
           .filter(match => match && match.names.length > 1),
-        path: fullPath,
+        filePath: fullPath,
       }
     }),
   )
