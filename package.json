@@ -49,6 +49,6 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
-    "globby": "^13.1.2"
+    "globby": "^11.1.0"
   }
 }
