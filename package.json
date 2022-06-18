@@ -7,6 +7,9 @@
     "email": "raine@cybersemics.org",
     "url": "https://github.com/raineorshine"
   },
+  "bin": {
+    "split-multiple-imports": "build/bin.js"
+  },
   "files": [
     "build"
   ],
