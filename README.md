@@ -8,8 +8,18 @@ Splits multiple names in a single es module import into multiple lines.
 
 ## Usage
 
+Dry run:
+
+```sh
+$ split-multiple-imports --dry
+9 imports in 4 files
+```
+
+Okay, let's do it:
+
 ```sh
 $ split-multiple-imports
+Replaced 9 imports in 4 files
 ```
 
 Before:
