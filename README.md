@@ -15,6 +15,13 @@ $ split-multiple-imports --dry
 9 imports in 4 files
 ```
 
+Ignore certain import paths:
+
+```sh
+$ split-multiple-imports --dry --ignore constants
+7 imports in 3 files
+```
+
 Okay, let's do it:
 
 ```sh
