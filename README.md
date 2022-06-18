@@ -8,22 +8,6 @@ Splits multiple names in a single es module import into multiple lines.
 
 ## Usage
 
-Dry run:
-
-```sh
-$ split-multiple-imports --dry
-9 imports in 4 files
-```
-
-Ignore certain import paths:
-
-```sh
-$ split-multiple-imports --dry --ignore constants
-7 imports in 3 files
-```
-
-Okay, let's do it:
-
 ```sh
 $ split-multiple-imports
 Replaced 9 imports in 4 files
@@ -41,4 +25,27 @@ After:
 import a from '../lib/a'
 import b from '../lib/b'
 import c from '../lib/c'
+```
+
+## Options
+
+Dry run:
+
+```sh
+$ split-multiple-imports --dry
+9 imports in 4 files
+```
+
+Ignore specific import paths:
+
+```sh
+$ split-multiple-imports --ignore constants
+Replaced 7 imports in 3 files
+```
+
+Replace only specific import paths:
+
+```sh
+$ split-multiple-imports --filter constants
+Replaced 2 imports in 1 file
 ```

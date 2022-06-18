@@ -11,7 +11,7 @@ const globby = require('globby')
 
 const cwd = process.cwd()
 
-const splitMultipleImports = async (startPath: string, options: { ignore?: string[] } = {}) => {
+const splitMultipleImports = async (startPath: string, options: { filter?: string[]; ignore?: string[] } = {}) => {
   const files: string[] = await globby(['**/*.ts', '!**/node_modules'], { cwd: startPath })
 
   // parse imports
@@ -37,12 +37,22 @@ const splitMultipleImports = async (startPath: string, options: { ignore?: strin
         const matches = statement.replace(/\n/g, '').matchAll(/import \{(.*)\} from '(\.[./]*.*)'/g)
         return matches
           ? Array.from(matches).map(([line, names, path]) => {
+              // ignore
               if (
                 options.ignore &&
                 options.ignore.length > 0 &&
-                options.ignore.some(ignorePath => path.includes(`/${ignorePath}`))
+                options.ignore.some(ignorePath => path.endsWith(ignorePath))
               )
                 return null
+              // filter
+              if (
+                options.filter &&
+                options.filter.length > 0 &&
+                !options.filter.some(filterPath => path.endsWith(filterPath))
+              )
+                return null
+
+              // return match with parsed names
               return {
                 line: statement,
                 // trim and split on any number of spaces to handle extra whitespace is present in multi-line import
