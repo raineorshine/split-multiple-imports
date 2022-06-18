@@ -19,6 +19,15 @@ test('splitMultipleImports', async () => {
           names: ['x7', 'x8', 'x9'],
           path: '../../x',
         },
+        {
+          line: `import {
+  y1,
+  y2,
+  y3 
+} from '../../y'`,
+          names: ['y1', 'y2', 'y3'],
+          path: '../../y',
+        },
       ],
       path: path.resolve(__dirname, '../../sample/index.ts'),
     },
